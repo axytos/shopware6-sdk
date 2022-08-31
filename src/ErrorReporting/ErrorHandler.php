@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\ErrorReporting;
 
@@ -13,8 +15,8 @@ class ErrorHandler
 
     public function __construct(
         ErrorReportingClientInterface $errorReportingClient,
-        KernelInterface $kernel)
-    {
+        KernelInterface $kernel
+    ) {
         $this->errorReportingClient = $errorReportingClient;
         $this->kernel = $kernel;
     }
@@ -23,8 +25,7 @@ class ErrorHandler
     {
         $this->errorReportingClient->reportError($throwable);
 
-        if ($this->kernel->isDebug())
-        {
+        if ($this->kernel->isDebug()) {
             throw $throwable;
         }
     }

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -28,8 +30,7 @@ class BasketDtoFactory
 
     private function getCurrencyIsoCode(?CurrencyEntity $currency): ?string
     {
-        if (is_null($currency))
-        {
+        if (is_null($currency)) {
             return null;
         }
 

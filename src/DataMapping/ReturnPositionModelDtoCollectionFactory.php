@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -17,12 +19,11 @@ class ReturnPositionModelDtoCollectionFactory
 
     public function create(?OrderLineItemCollection $orderLineItemCollection): ReturnPositionModelDtoCollection
     {
-        if (is_null($orderLineItemCollection))
-        {
+        if (is_null($orderLineItemCollection)) {
             return new ReturnPositionModelDtoCollection();
         }
 
-        $positons = array_values($orderLineItemCollection->map(function(OrderLineItemEntity $orderLineItemEntity){
+        $positons = array_values($orderLineItemCollection->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return $this->returnPositionModelDtoFactory->create($orderLineItemEntity);
         }));
 

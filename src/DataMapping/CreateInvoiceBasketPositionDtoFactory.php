@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -13,7 +15,7 @@ use LogicException;
 use Shopware\Core\Checkout\Order\Aggregate\OrderLineItem\OrderLineItemEntity;
 use Shopware\Core\Checkout\Order\OrderEntity;
 
-class CreateInvoiceBasketPositionDtoFactory 
+class CreateInvoiceBasketPositionDtoFactory
 {
     private PositionNetPriceCalculator $positionNetPriceCalculator;
     private PositionTaxPercentCalculator $positionTaxPercentCalculator;
@@ -23,13 +25,13 @@ class CreateInvoiceBasketPositionDtoFactory
     private PositionProductNameCalculator $positionProductNameCalculator;
 
     public function __construct(
-        PositionNetPriceCalculator $positionNetPriceCalculator, 
+        PositionNetPriceCalculator $positionNetPriceCalculator,
         PositionTaxPercentCalculator $positionTaxPercentCalculator,
         PositionNetPricePerUnitCalculator $positionNetPricePerUnitCalculator,
         PositionGrossPricePerUnitCalculator $positionGrossPricePerUnitCalculator,
         PositionProductIdCalculator $positionProductIdCalculator,
-        PositionProductNameCalculator $positionProductNameCalculator)
-    {
+        PositionProductNameCalculator $positionProductNameCalculator
+    ) {
         $this->positionNetPriceCalculator = $positionNetPriceCalculator;
         $this->positionTaxPercentCalculator = $positionTaxPercentCalculator;
         $this->positionNetPricePerUnitCalculator = $positionNetPricePerUnitCalculator;
@@ -65,7 +67,7 @@ class CreateInvoiceBasketPositionDtoFactory
         $shippingPosition->taxPercent = $this->positionTaxPercentCalculator->calculate($orderEntity->getShippingCosts());
         $shippingPosition->netPricePerUnit = $this->positionNetPricePerUnitCalculator->calculate($orderEntity->getShippingCosts());
         $shippingPosition->grossPricePerUnit = $this->positionGrossPricePerUnitCalculator->calculate($orderEntity->getShippingCosts());
-        
+
         return $shippingPosition;
     }
 }

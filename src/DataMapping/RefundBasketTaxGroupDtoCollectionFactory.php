@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -17,12 +19,11 @@ class RefundBasketTaxGroupDtoCollectionFactory
 
     public function create(?CalculatedTaxCollection $calculatedTaxCollection = null): RefundBasketTaxGroupDtoCollection
     {
-        if (is_null($calculatedTaxCollection))
-        {
+        if (is_null($calculatedTaxCollection)) {
             return new RefundBasketTaxGroupDtoCollection();
         }
 
-        $positions = array_values($calculatedTaxCollection->map(function(CalculatedTax $calculatedTax){
+        $positions = array_values($calculatedTaxCollection->map(function (CalculatedTax $calculatedTax) {
             return $this->refundBasketTaxGroupDtoFactory->create($calculatedTax);
         }));
 

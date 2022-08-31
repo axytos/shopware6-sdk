@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\ValueCalculation;
 
@@ -8,8 +10,7 @@ class PositionNetPriceCalculator
 {
     public function calculate(?CalculatedPrice $calculatedPrice): float
     {
-        if (is_null($calculatedPrice))
-        {
+        if (is_null($calculatedPrice)) {
             return 0;
         }
 
@@ -18,8 +19,7 @@ class PositionNetPriceCalculator
         $totalTax = $calculatedTaxes->getAmount();
         $netPrice = round($totalPrice - $totalTax, 2);
 
-        if ($netPrice < 0)
-        {
+        if ($netPrice < 0) {
             return 0;
         }
 

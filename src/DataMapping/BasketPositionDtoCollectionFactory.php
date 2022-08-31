@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -17,12 +19,11 @@ class BasketPositionDtoCollectionFactory
 
     public function create(?OrderEntity $orderEntity): BasketPositionDtoCollection
     {
-        if (is_null($orderEntity) || is_null($orderEntity->getLineItems()) || count($orderEntity->getLineItems()) == 0)
-        {
+        if (is_null($orderEntity) || is_null($orderEntity->getLineItems()) || count($orderEntity->getLineItems()) == 0) {
             return new BasketPositionDtoCollection();
         }
 
-        $positions = $orderEntity->getLineItems()->map(function(OrderLineItemEntity $orderLineItemEntity){
+        $positions = $orderEntity->getLineItems()->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return $this->basketPositionFactory->create($orderLineItemEntity);
         });
 

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -16,13 +18,12 @@ class DeliveryAddressDtoFactory
         if ($deliveries) {
             $deliveryElements = $deliveries->getElements();
 
-            if (is_array($deliveryElements) && !empty($deliveryElements))
-            {
+            if (is_array($deliveryElements) && !empty($deliveryElements)) {
                 $deliveryElement = $deliveryElements[array_key_first($deliveryElements)];
 
                 $shippingOrderAddress = $deliveryElement->getShippingOrderAddress();
 
-                if($shippingOrderAddress) {
+                if ($shippingOrderAddress) {
                     $deliveryAddress->addressLine1 = $shippingOrderAddress->getStreet();
                     $deliveryAddress->city = $shippingOrderAddress->getCity();
                     $deliveryAddress->company = $shippingOrderAddress->getCompany();
@@ -32,20 +33,17 @@ class DeliveryAddressDtoFactory
                     $deliveryAddress->vatId = $shippingOrderAddress->getVatId();
 
                     $country = $shippingOrderAddress->getCountry();
-                    if ($country && $country->getIso())
-                    {
+                    if ($country && $country->getIso()) {
                         $deliveryAddress->country = $country->getIso();
                     }
 
                     $countryState = $shippingOrderAddress->getCountryState();
-                    if ($countryState)
-                    {
+                    if ($countryState) {
                         $deliveryAddress->region = $countryState->getName();
                     }
 
                     $salutation = $shippingOrderAddress->getSalutation();
-                    if ($salutation)
-                    {
+                    if ($salutation) {
                         $deliveryAddress->salutation = $salutation->getDisplayName();
                     }
                 }

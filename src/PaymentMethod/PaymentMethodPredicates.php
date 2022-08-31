@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\PaymentMethod;
 
@@ -14,9 +16,9 @@ class PaymentMethodPredicates
 
     public function __construct(
         PaymentMethodConfigurationInterface $paymentMethodConfiguration,
-        FallbackModeConfigurationInterface $fallbackModeConfiguration)
-    {
-        
+        FallbackModeConfigurationInterface $fallbackModeConfiguration
+    ) {
+
         $this->paymentMethodConfiguration = $paymentMethodConfiguration;
         $this->fallbackModeConfiguration = $fallbackModeConfiguration;
     }
@@ -24,9 +26,8 @@ class PaymentMethodPredicates
     public function isAllowedFallback(PaymentMethodEntity $paymentMethodEntity): bool
     {
         $fallbackMode = $this->fallbackModeConfiguration->getFallbackMode();
-        
-        switch ($fallbackMode)
-        {
+
+        switch ($fallbackMode) {
             case FallbackModes::ALL_PAYMENT_METHODS:
                 return true;
             case FallbackModes::NO_UNSAFE_PAYMENT_METHODS:

@@ -1,13 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
 use Axytos\ECommerce\DataTransferObjects\CreateInvoiceTaxGroupDto;
 use Shopware\Core\Checkout\Cart\Tax\Struct\CalculatedTax;
 
-class CreateInvoiceTaxGroupDtoFactory 
+class CreateInvoiceTaxGroupDtoFactory
 {
-    public function create(CalculatedTax $calculatedTax): CreateInvoiceTaxGroupDto 
+    public function create(CalculatedTax $calculatedTax): CreateInvoiceTaxGroupDto
     {
         $createInvoiceTaxGroupDto = new CreateInvoiceTaxGroupDto();
         $createInvoiceTaxGroupDto->taxPercent = $calculatedTax->getTaxRate();

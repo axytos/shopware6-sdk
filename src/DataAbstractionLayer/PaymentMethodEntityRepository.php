@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataAbstractionLayer;
 
@@ -17,14 +19,14 @@ class PaymentMethodEntityRepository
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
-    
+
     public function create(
         string $handlerIdentifier,
         string $name,
         string $description,
         string $pluginId,
-        Context $context): void
-    {
+        Context $context
+    ): void {
         $paymentMethodData = [
             'handlerIdentifier' => $handlerIdentifier,
             'name' => $name,
@@ -53,11 +55,11 @@ class PaymentMethodEntityRepository
     public function updateAllActiveStatesByHandlerIdentifer(
         string $handlerIdentifier,
         bool $isActive,
-        Context $context): void
-    {
+        Context $context
+    ): void {
         $paymentMethods = $this->findAllByHandlerIdentifier($handlerIdentifier, $context);
 
-        $data = array_values($paymentMethods->map(function(PaymentMethodEntity $entity) use ($isActive){
+        $data = array_values($paymentMethods->map(function (PaymentMethodEntity $entity) use ($isActive) {
             return [
                 'id' => $entity->getId(),
                 'active' => $isActive,

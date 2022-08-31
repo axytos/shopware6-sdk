@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -19,11 +21,11 @@ class PaymentControlBasketPositionDtoFactory
     private PositionProductNameCalculator $positionProductNameCalculator;
 
     public function __construct(
-        PositionNetPriceCalculator $positionNetPriceCalculator, 
+        PositionNetPriceCalculator $positionNetPriceCalculator,
         PositionTaxPercentCalculator $positionTaxPercentCalculator,
         PositionProductIdCalculator $positionProductIdCalculator,
-        PositionProductNameCalculator $positionProductNameCalculator)
-    {
+        PositionProductNameCalculator $positionProductNameCalculator
+    ) {
         $this->positionNetPriceCalculator = $positionNetPriceCalculator;
         $this->positionTaxPercentCalculator = $positionTaxPercentCalculator;
         $this->positionProductIdCalculator = $positionProductIdCalculator;
@@ -52,7 +54,7 @@ class PaymentControlBasketPositionDtoFactory
         $shippingPosition->grossPositionTotal = $orderEntity->getShippingTotal();
         $shippingPosition->netPositionTotal = $this->positionNetPriceCalculator->calculate($orderEntity->getShippingCosts());
         $shippingPosition->taxPercent = $this->positionTaxPercentCalculator->calculate($orderEntity->getShippingCosts());
-        
+
         return $shippingPosition;
     }
 }

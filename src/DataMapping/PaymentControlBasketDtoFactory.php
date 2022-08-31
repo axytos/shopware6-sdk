@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -20,8 +22,7 @@ class PaymentControlBasketDtoFactory
 
         $currency = $orderEntity->getCurrency();
 
-        if (!is_null($currency))
-        {
+        if (!is_null($currency)) {
             $basket->currency = $currency->getIsoCode();
         }
 
@@ -31,5 +32,4 @@ class PaymentControlBasketDtoFactory
 
         return $basket;
     }
-
 }

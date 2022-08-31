@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Order;
 
@@ -22,8 +24,7 @@ class OrderCheckProcessStateMachine
     {
         $customFields = $this->orderEntityRepository->getCustomFields($orderId, $context);
 
-        if (!array_key_exists(self::CUSTOM_FIELD_NAME, $customFields))
-        {
+        if (!array_key_exists(self::CUSTOM_FIELD_NAME, $customFields)) {
             return OrderCheckProcessStates::UNCHECKED;
         }
 

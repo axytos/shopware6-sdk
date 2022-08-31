@@ -1,11 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Order;
 
 use Axytos\Shopware\DataAbstractionLayer\OrderEntityRepository;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 
-class OrderStateMachine 
+class OrderStateMachine
 {
     private OrderEntityRepository $orderEntityRepository;
 

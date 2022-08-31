@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -13,8 +15,7 @@ class InvoiceAddressDtoFactory
 
         $billingAddress = $orderEntity->getBillingAddress();
 
-        if ($billingAddress)
-        {
+        if ($billingAddress) {
             $invoiceAddress->addressLine1 = $billingAddress->getStreet();
             $invoiceAddress->city = $billingAddress->getCity();
             $invoiceAddress->company = $billingAddress->getCompany();
@@ -24,20 +25,17 @@ class InvoiceAddressDtoFactory
             $invoiceAddress->vatId = $billingAddress->getVatId();
 
             $country = $billingAddress->getCountry();
-            if ($country && $country->getIso())
-            {
+            if ($country && $country->getIso()) {
                 $invoiceAddress->country = $country->getIso();
             }
 
             $countryState = $billingAddress->getCountryState();
-            if ($countryState)
-            {
+            if ($countryState) {
                 $invoiceAddress->region = $countryState->getName();
             }
 
             $salutation = $billingAddress->getSalutation();
-            if ($salutation)
-            {
+            if ($salutation) {
                 $invoiceAddress->salutation = $salutation->getDisplayName();
             }
         }

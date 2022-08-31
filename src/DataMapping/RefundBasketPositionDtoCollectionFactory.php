@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -23,16 +25,15 @@ class RefundBasketPositionDtoCollectionFactory
 
     public function create(?OrderLineItemCollection $orderLineItems = null): RefundBasketPositionDtoCollection
     {
-        if (is_null($orderLineItems))
-        {
+        if (is_null($orderLineItems)) {
             return new RefundBasketPositionDtoCollection();
         }
 
-        $credits = $orderLineItems->filter(function(OrderLineItemEntity $orderLineItemEntity){
+        $credits = $orderLineItems->filter(function (OrderLineItemEntity $orderLineItemEntity) {
             return $orderLineItemEntity->getType() === LineItem::CREDIT_LINE_ITEM_TYPE;
         });
 
-        $products = $orderLineItems->filter(function(OrderLineItemEntity $orderLineItemEntity){
+        $products = $orderLineItems->filter(function (OrderLineItemEntity $orderLineItemEntity) {
             return $orderLineItemEntity->getType() === LineItem::PRODUCT_LINE_ITEM_TYPE;
         });
 
@@ -40,8 +41,7 @@ class RefundBasketPositionDtoCollectionFactory
 
         $positions = [];
 
-        foreach ($groupedCredits as $taxRate => $credits)
-        {
+        foreach ($groupedCredits as $taxRate => $credits) {
             $grossRefundTotal = $this->calculateGrossRefundTotal($credits);
             $netRefundTotal = $this->calculateNetRefundTotal($credits);
             $productNumber = $this->findProductNumberForTaxRate($products, (string) $taxRate);
@@ -50,7 +50,7 @@ class RefundBasketPositionDtoCollectionFactory
 
             array_push($positions, $position);
         }
-        
+
         $result = new RefundBasketPositionDtoCollection(...$positions);
 
         return $result;
@@ -62,14 +62,12 @@ class RefundBasketPositionDtoCollectionFactory
      */
     private function calculateGrossRefundTotal(array $orderLineItems): float
     {
-        $grossPrices = array_map(function(OrderLineItemEntity $oli)
-        {
+        $grossPrices = array_map(function (OrderLineItemEntity $oli) {
             $price = $oli->getPrice();
-            if(is_null($price))
-            {
+            if (is_null($price)) {
                 return 0;
             }
-            $price->getTotalPrice(); 
+            $price->getTotalPrice();
         }, $orderLineItems);
 
         return  (float) array_sum($grossPrices) * -1;
@@ -81,9 +79,8 @@ class RefundBasketPositionDtoCollectionFactory
      */
     private function calculateNetRefundTotal(array $orderLineItems): float
     {
-        $netPrices = array_map(function(OrderLineItemEntity $oli)
-        { 
-            return $this->positionNetPriceCalculator->calculate($oli->getPrice()); 
+        $netPrices = array_map(function (OrderLineItemEntity $oli) {
+            return $this->positionNetPriceCalculator->calculate($oli->getPrice());
         }, $orderLineItems);
 
         return (float) array_sum($netPrices) * -1;
@@ -94,16 +91,14 @@ class RefundBasketPositionDtoCollectionFactory
      */
     private function groupLineItemsByTaxRate(OrderLineItemCollection $orderLineItems): array
     {
-        return $orderLineItems->reduce(function(array $carry, OrderLineItemEntity $orderLineItemEntity) {
+        return $orderLineItems->reduce(function (array $carry, OrderLineItemEntity $orderLineItemEntity) {
             $price = $orderLineItemEntity->getPrice();
-            if(!is_null($price))
-            {
+            if (!is_null($price)) {
                 $calculatedTax = $price->getCalculatedTaxes()->first();
-                if(!is_null($calculatedTax))
-                {
+                if (!is_null($calculatedTax)) {
                     $taxRate = $calculatedTax->getTaxRate();
                     $taxKey = "$taxRate";
-        
+
                     $carry[$taxKey][] = $orderLineItemEntity;
                 }
             }
@@ -114,17 +109,14 @@ class RefundBasketPositionDtoCollectionFactory
 
     private function findProductNumberForTaxRate(OrderLineItemCollection $products, string $taxRate): string
     {
-        foreach ($products as $product)
-        {
+        foreach ($products as $product) {
             $price = $product->getPrice();
-            if(!is_null($price)) {
+            if (!is_null($price)) {
                 $calculatedTax = $price->getCalculatedTaxes()->first();
-                if(!is_null($calculatedTax))
-                {
+                if (!is_null($calculatedTax)) {
                     if ($calculatedTax->getTaxRate() == $taxRate) {
                         $product = $product->getProduct();
-                        if(!is_null($product))
-                        {
+                        if (!is_null($product)) {
                             return $product->getProductNumber();
                         }
                     }

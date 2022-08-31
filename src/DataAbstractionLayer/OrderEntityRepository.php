@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataAbstractionLayer;
 
@@ -20,8 +22,8 @@ class OrderEntityRepository
 
     public function __construct(
         EntityRepositoryInterface $orderRepository,
-        StateMachineRegistry $stateMachineRegistry)
-    {
+        StateMachineRegistry $stateMachineRegistry
+    ) {
         $this->orderRepository = $orderRepository;
         $this->stateMachineRegistry = $stateMachineRegistry;
     }
@@ -58,8 +60,7 @@ class OrderEntityRepository
 
         $orderEntity = $this->findFirst($criteria, $context);
 
-        if (is_null($orderEntity->getCustomFields()))
-        {
+        if (is_null($orderEntity->getCustomFields())) {
             return [];
         }
 
@@ -82,7 +83,7 @@ class OrderEntityRepository
         $criteria->addAssociation('deliveries');
         $criteria->setLimit(1);
         $order = $this->orderRepository->search($criteria, $context)->first();
-        
+
         $this->stateMachineRegistry->transition(new Transition(
             OrderDefinition::ENTITY_NAME,
             $order->getId(),
@@ -90,8 +91,7 @@ class OrderEntityRepository
             'stateId'
         ), $context);
 
-        foreach($order->getTransactions() as $orderTransaction)
-        {
+        foreach ($order->getTransactions() as $orderTransaction) {
             $this->stateMachineRegistry->transition(new Transition(
                 OrderTransactionDefinition::ENTITY_NAME,
                 $orderTransaction->getId(),
@@ -100,8 +100,7 @@ class OrderEntityRepository
             ), $context);
         }
 
-        foreach($order->getDeliveries() as $orderDelivery)
-        {
+        foreach ($order->getDeliveries() as $orderDelivery) {
             $this->stateMachineRegistry->transition(new Transition(
                 OrderDeliveryDefinition::ENTITY_NAME,
                 $orderDelivery->getId(),
@@ -118,8 +117,7 @@ class OrderEntityRepository
         $criteria->setLimit(1);
         $order = $this->orderRepository->search($criteria, $context)->first();
 
-        foreach($order->getTransactions() as $orderTransaction)
-        {
+        foreach ($order->getTransactions() as $orderTransaction) {
             $this->stateMachineRegistry->transition(new Transition(
                 OrderTransactionDefinition::ENTITY_NAME,
                 $orderTransaction->getId(),

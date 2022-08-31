@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\ValueCalculation;
 
@@ -18,8 +20,7 @@ class PositionProductIdCalculator
     public function calculate(OrderLineItemEntity $orderLineItemEntity): string
     {
         $type = $orderLineItemEntity->getType();
-        switch ($type)
-        {
+        switch ($type) {
             case LineItem::PRODUCT_LINE_ITEM_TYPE:
                 return $this->calculateForProduct($orderLineItemEntity);
             case LineItem::PROMOTION_LINE_ITEM_TYPE:
@@ -34,8 +35,7 @@ class PositionProductIdCalculator
     {
         $product = $orderLineItemEntity->getProduct();
 
-        if (is_null($product))
-        {
+        if (is_null($product)) {
             throw new InvalidArgumentException('Product of OrderLineItemEntity must not be NULL!');
         }
 

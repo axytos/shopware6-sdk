@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataMapping;
 
@@ -15,29 +17,25 @@ class CustomerDataDtoFactory
 
         $orderCustomer = $orderEntity->getOrderCustomer();
 
-        if ($orderCustomer)
-        {
+        if ($orderCustomer) {
             $personalData->email = $orderCustomer->getEmail();
-            if($orderCustomer->getCustomerNumber() && $orderCustomer->getCustomerId()){
-                $personalData->externalCustomerId = $orderCustomer->getCustomerNumber().'-'.$orderCustomer->getCustomerId();
+            if ($orderCustomer->getCustomerNumber() && $orderCustomer->getCustomerId()) {
+                $personalData->externalCustomerId = $orderCustomer->getCustomerNumber() . '-' . $orderCustomer->getCustomerId();
             }
-            
 
-            if ($orderCustomer->getCompany())
-            {
+
+            if ($orderCustomer->getCompany()) {
                 $personalData->company = new CompanyDto();
-                
+
                 $personalData->company->name = $orderCustomer->getCompany();
             }
 
             $customer = $orderCustomer->getCustomer();
 
-            if ($customer)
-            {
+            if ($customer) {
                 $birthDay = $customer->getBirthday();
-                if ($birthDay)
-                {        
-                    $personalData->dateOfBirth = new DateTimeImmutable('@'.$birthDay->getTimestamp(), $birthDay->getTimezone());
+                if ($birthDay) {
+                    $personalData->dateOfBirth = new DateTimeImmutable('@' . $birthDay->getTimestamp(), $birthDay->getTimezone());
                 }
             }
         }

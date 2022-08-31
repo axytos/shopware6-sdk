@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\ValueCalculation;
 
@@ -9,13 +11,12 @@ class PositionTaxPercentCalculator
 {
     public function calculate(?CalculatedPrice $calculatedPrice): float
     {
-        if (is_null($calculatedPrice))
-        {
+        if (is_null($calculatedPrice)) {
             return 0;
         }
 
         $calculatedTaxes = $calculatedPrice->getCalculatedTaxes();
-        $taxRates = $calculatedTaxes->map(function(CalculatedTax $calculatedTax){
+        $taxRates = $calculatedTaxes->map(function (CalculatedTax $calculatedTax) {
             return $calculatedTax->getTaxRate();
         });
 

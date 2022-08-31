@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\PaymentMethod;
 
@@ -16,21 +18,21 @@ class PaymentMethodCollectionFilter
 
     public function filterAllowedFallbackPaymentMethods(PaymentMethodCollection $paymentMethodCollection): PaymentMethodCollection
     {
-        return $paymentMethodCollection->filter(function(PaymentMethodEntity $paymentMethodEntity){
+        return $paymentMethodCollection->filter(function (PaymentMethodEntity $paymentMethodEntity) {
             return $this->paymentMethodPredicates->isAllowedFallback($paymentMethodEntity);
         });
     }
 
     public function filterNotUnsafePaymentMethods(PaymentMethodCollection $paymentMethodCollection): PaymentMethodCollection
     {
-        return $paymentMethodCollection->filter(function(PaymentMethodEntity $paymentMethodEntity){
+        return $paymentMethodCollection->filter(function (PaymentMethodEntity $paymentMethodEntity) {
             return $this->paymentMethodPredicates->isNotUnsafe($paymentMethodEntity);
         });
     }
 
     public function filterPaymentMethodsNotUsingHandler(PaymentMethodCollection $paymentMethodCollection, string $handlerClass): PaymentMethodCollection
     {
-        return $paymentMethodCollection->filter(function(PaymentMethodEntity $paymentMethodEntity) use ($handlerClass){
+        return $paymentMethodCollection->filter(function (PaymentMethodEntity $paymentMethodEntity) use ($handlerClass) {
             return !$this->paymentMethodPredicates->usesHandler($paymentMethodEntity, $handlerClass);
         });
     }

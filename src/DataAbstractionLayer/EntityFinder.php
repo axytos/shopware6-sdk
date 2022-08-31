@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\DataAbstractionLayer;
 
@@ -24,16 +26,14 @@ class EntityFinder
      * @phpstan-return TEntity
      */
     public function findFirst(Criteria $criteria, Context $context): Entity
-    {   
+    {
         $criteria->setLimit(1);
-        $entitySearchResult = $this->entityRepository->search($criteria, $context);        
+        $entitySearchResult = $this->entityRepository->search($criteria, $context);
 
-        if ($entitySearchResult->count() < 1)
-        {
+        if ($entitySearchResult->count() < 1) {
             throw new LogicException('Given criteria did not find any entities!');
         }
 
         return $entitySearchResult->first();
     }
-    
 }

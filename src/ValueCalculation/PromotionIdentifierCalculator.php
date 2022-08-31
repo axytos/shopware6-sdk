@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\ValueCalculation;
 
@@ -18,8 +20,7 @@ class PromotionIdentifierCalculator
     {
         $promotion = $orderLineItemEntity->getPromotion();
 
-        if (is_null($promotion))
-        {
+        if (is_null($promotion)) {
             return null;
         }
 
