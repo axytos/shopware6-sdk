@@ -23,10 +23,12 @@ class ReturnPositionModelDtoCollectionFactory
             return new ReturnPositionModelDtoCollection();
         }
 
-        $positons = array_values($orderLineItemCollection->map(function (OrderLineItemEntity $orderLineItemEntity) {
+        $positions = array_values($orderLineItemCollection->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return $this->returnPositionModelDtoFactory->create($orderLineItemEntity);
         }));
 
-        return new ReturnPositionModelDtoCollection(...$positons);
+        array_push($positions, $this->returnPositionModelDtoFactory->createShippingPosition());
+
+        return new ReturnPositionModelDtoCollection(...$positions);
     }
 }

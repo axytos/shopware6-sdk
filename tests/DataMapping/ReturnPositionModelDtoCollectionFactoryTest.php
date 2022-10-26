@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -29,7 +31,7 @@ class ReturnPositionModelDtoCollectionFactoryTest extends TestCase
      */
     public function test_create(OrderLineItemCollection $orderLineItemCollection): void
     {
-        $mappings = $orderLineItemCollection->map(function(OrderLineItemEntity $orderLineItemEntity){
+        $mappings = $orderLineItemCollection->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return [$orderLineItemEntity, $this->createMock(ReturnPositionModelDto::class)];
         });
 
@@ -39,7 +41,8 @@ class ReturnPositionModelDtoCollectionFactoryTest extends TestCase
 
         $actual = $this->sut->create($orderLineItemCollection);
 
-        $this->assertCount(count($orderLineItemCollection), $actual);
+        // One extra for shipping
+        $this->assertCount(count($orderLineItemCollection) + 1, $actual);
 
         foreach ($mappings as $mapping) {
             $this->assertContains($mapping[1], $actual);
@@ -76,7 +79,7 @@ class ReturnPositionModelDtoCollectionFactoryTest extends TestCase
     private function createOrderLineItem(): OrderLineItemEntity
     {
         $id = bin2hex(random_bytes(64));
-        
+
         /** @var OrderLineItemEntity&MockObject */
         $entity = $this->createMock(OrderLineItemEntity::class);
         $entity->method('getUniqueIdentifier')->willReturn($id);

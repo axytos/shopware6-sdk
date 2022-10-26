@@ -72,6 +72,10 @@ class PaymentMethodEntityRepository
     private function findAll(Criteria $criteria, Context $context): PaymentMethodCollection
     {
         $searchResult = $this->paymentMethodRepository->search($criteria, $context);
-        return new PaymentMethodCollection($searchResult->getEntities());
+
+        /** @var iterable<PaymentMethodEntity> */
+        $entities = $searchResult->getEntities();
+
+        return new PaymentMethodCollection($entities);
     }
 }

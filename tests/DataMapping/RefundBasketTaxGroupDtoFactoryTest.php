@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -16,7 +18,7 @@ class RefundBasketTaxGroupDtoFactoryTest extends TestCase
         $this->sut = new RefundBasketTaxGroupDtoFactory();
     }
 
-    public function test_maps_taxPercent() : void
+    public function test_maps_taxPercent(): void
     {
         $taxPercent = 10.1;
 
@@ -32,7 +34,7 @@ class RefundBasketTaxGroupDtoFactoryTest extends TestCase
         $this->assertSame($taxPercent, $actual);
     }
 
-    public function test_maps_valueToTax() : void
+    public function test_maps_valueToTax(): void
     {
         $valueToTax = 11.1;
 
@@ -48,7 +50,7 @@ class RefundBasketTaxGroupDtoFactoryTest extends TestCase
         $this->assertSame($valueToTax, $actual);
     }
 
-    public function test_maps_total() : void
+    public function test_maps_total(): void
     {
         $total = 12.1;
 

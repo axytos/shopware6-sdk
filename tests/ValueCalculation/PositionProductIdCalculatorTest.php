@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\ValueCalculation;
 
@@ -29,11 +31,11 @@ class PositionProductIdCalculatorTest extends TestCase
      * @dataProvider dataProvider_test_calculate
      */
     public function test_calculate(
-        string $orderLineItemType, 
-        string $productNumber, 
-        string $promotionIdentifier, 
-        string $expectedResult): void
-    {
+        string $orderLineItemType,
+        string $productNumber,
+        string $promotionIdentifier,
+        string $expectedResult
+    ): void {
         /** @var ProductEntity&MockObject */
         $product = $this->createMock(ProductEntity::class);
         $product->method('getProductNumber')->willReturn($productNumber);

@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -24,7 +26,7 @@ class CreateInvoiceTaxGroupDtoCollectionFactoryTest extends TestCase
         $this->sut = new CreateInvoiceTaxGroupDtoCollectionFactory($this->createInvoiceTaxGroupDtoFactory);
     }
 
-    public function test_with_null_orderLineItems() : void
+    public function test_with_null_orderLineItems(): void
     {
         $expected = new CreateInvoiceTaxGroupDtoCollection();
         $orderLineItems = null;
@@ -34,12 +36,11 @@ class CreateInvoiceTaxGroupDtoCollectionFactoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function test_with_orderLineItems() : void
+    public function test_with_orderLineItems(): void
     {
         $expected = new CreateInvoiceTaxGroupDtoCollection(new CreateInvoiceTaxGroupDto(), new CreateInvoiceTaxGroupDto());
         $calculatedTaxCollection = new CalculatedTaxCollection();
-        for($i = 0; $i < $expected->count(); $i++)
-        {
+        for ($i = 0; $i < $expected->count(); $i++) {
             $orderLineItemEntity = new CalculatedTax($i, $i, $i);
             $calculatedTaxCollection->add($orderLineItemEntity);
         }
@@ -47,7 +48,9 @@ class CreateInvoiceTaxGroupDtoCollectionFactoryTest extends TestCase
         $this->createInvoiceTaxGroupDtoFactory
             ->expects($this->exactly($expected->count()))
             ->method('create')
-            ->withConsecutive(...$calculatedTaxCollection->map(function(CalculatedTax $orderLineItemEntity){ return [$orderLineItemEntity]; }))
+            ->withConsecutive(...$calculatedTaxCollection->map(function (CalculatedTax $orderLineItemEntity) {
+                return [$orderLineItemEntity];
+            }))
             ->willReturnOnConsecutiveCalls(...$expected->getElements());
 
         $actual = $this->sut->create($calculatedTaxCollection);

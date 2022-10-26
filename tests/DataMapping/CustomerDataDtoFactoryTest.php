@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -18,7 +20,7 @@ class CustomerDataDtoFactoryTest extends TestCase
         $this->sut = new CustomerDataDtoFactory();
     }
 
-    public function test_create_maps_personalData_correctly_without_existing_customer() : void
+    public function test_create_maps_personalData_correctly_without_existing_customer(): void
     {
         /** @var OrderEntity&MockObject $order */
         $order = $this->createMock(OrderEntity::class);
@@ -32,7 +34,7 @@ class CustomerDataDtoFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
@@ -40,23 +42,23 @@ class CustomerDataDtoFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerId')
             ->willReturn($customerId);
-        
+
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn(null);
-        
+
         $actual = $this->sut->create($order);
 
         $this->assertSame($email, $actual->email);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->externalCustomerId);
         $this->assertSame(null, $actual->dateOfBirth);
     }
 
-    public function test_create_maps_personalData_correctly_for_existing_customer_without_birthdate() : void
+    public function test_create_maps_personalData_correctly_for_existing_customer_without_birthdate(): void
     {
         /** @var OrderEntity&MockObject $order */
         $order = $this->createMock(OrderEntity::class);
@@ -72,7 +74,7 @@ class CustomerDataDtoFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
@@ -84,7 +86,7 @@ class CustomerDataDtoFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn($customer);
@@ -92,15 +94,15 @@ class CustomerDataDtoFactoryTest extends TestCase
         $customer
             ->method('getBirthDay')
             ->willReturn(null);
-        
+
         $actual = $this->sut->create($order);
 
         $this->assertSame($email, $actual->email);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->externalCustomerId);
         $this->assertSame(null, $actual->dateOfBirth);
     }
 
-    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_type() : void
+    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_type(): void
     {
         /** @var OrderEntity&MockObject $order */
         $order = $this->createMock(OrderEntity::class);
@@ -118,7 +120,7 @@ class CustomerDataDtoFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
@@ -130,7 +132,7 @@ class CustomerDataDtoFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn($customer);
@@ -138,16 +140,16 @@ class CustomerDataDtoFactoryTest extends TestCase
         $customer
             ->method('getBirthDay')
             ->willReturn($dateTime);
-        
+
         $actual = $this->sut->create($order);
 
         $this->assertSame($email, $actual->email);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->externalCustomerId);
         $this->assertNotNull($actual->dateOfBirth);
         $this->assertSame($dateTime->getTimestamp(), $actual->dateOfBirth->getTimestamp());
     }
-    
-    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_immutable_type() : void
+
+    public function test_create_maps_personalData_correctly_for_existing_customer_with_birthdate_date_time_immutable_type(): void
     {
         /** @var OrderEntity&MockObject $order */
         $order = $this->createMock(OrderEntity::class);
@@ -166,11 +168,11 @@ class CustomerDataDtoFactoryTest extends TestCase
         $order
             ->method('getOrderCustomer')
             ->willReturn($orderCustomer);
-        
+
         $orderCustomer
             ->method('getEmail')
             ->willReturn($email);
-        
+
         $orderCustomer
             ->method('getCompany')
             ->willReturn($company);
@@ -182,7 +184,7 @@ class CustomerDataDtoFactoryTest extends TestCase
         $orderCustomer
             ->method('getCustomerNumber')
             ->willReturn($customerNumber);
-        
+
         $orderCustomer
             ->method('getCustomer')
             ->willReturn($customer);
@@ -190,13 +192,13 @@ class CustomerDataDtoFactoryTest extends TestCase
         $customer
             ->method('getBirthDay')
             ->willReturn($dateTimeImmutable);
-        
+
         $actual = $this->sut->create($order);
 
         $this->assertSame($email, $actual->email);
         /** @phpstan-ignore-next-line */
         $this->assertSame($company, $actual->company->name);
-        $this->assertSame($customerNumber.'-'.$customerId, $actual->externalCustomerId);
+        $this->assertSame($customerNumber . '-' . $customerId, $actual->externalCustomerId);
         $this->assertNotNull($actual->dateOfBirth);
         $this->assertSame($dateTimeImmutable->getTimestamp(), $actual->dateOfBirth->getTimestamp());
     }

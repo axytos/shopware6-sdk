@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -92,11 +94,10 @@ class BasketDtoFactoryTest extends TestCase
         $orderEntity->method('getAmountNet')->willReturn(67.89);
         $orderEntity->method('getLineItems')->willReturn($this->createMock(OrderLineItemCollection::class));
 
-        if ($hasCurrency)
-        {
+        if ($hasCurrency) {
             /** @var CurrencyEntity&MockObject */
             $currency = $this->createMock(CurrencyEntity::class);
-            $currency->method('getIsoCode')->willReturn('EUR');       
+            $currency->method('getIsoCode')->willReturn('EUR');
             $orderEntity->method('getCurrency')->willReturn($currency);
         }
 

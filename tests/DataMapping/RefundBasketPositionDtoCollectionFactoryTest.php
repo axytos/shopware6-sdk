@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -187,7 +189,7 @@ class RefundBasketPositionDtoCollectionFactoryTest extends TestCase
         return $orderLineItemEntity;
     }
 
-    public function test_with_null_orderLineItems() : void
+    public function test_with_null_orderLineItems(): void
     {
         $expected = new RefundBasketPositionDtoCollection();
         $orderLineItems = null;
@@ -197,14 +199,14 @@ class RefundBasketPositionDtoCollectionFactoryTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function test_creates_RefundBasketPositions_for_credit_taxRates() : void
+    public function test_creates_RefundBasketPositions_for_credit_taxRates(): void
     {
         $actual = $this->sut->create($this->orderLineItems);
 
         $this->assertEquals(2, $actual->count());
     }
 
-    public function test_creates_maps_productNumber_for_RefundBasketPositions() : void
+    public function test_creates_maps_productNumber_for_RefundBasketPositions(): void
     {
         $actual = $this->sut->create($this->orderLineItems);
 
@@ -212,7 +214,7 @@ class RefundBasketPositionDtoCollectionFactoryTest extends TestCase
         $this->assertEquals("productNumber3", $actual->getElements()[1]->productId);
     }
 
-    public function test_creates_maps_grossRefundTotals_for_RefundBasketPositions() : void
+    public function test_creates_maps_grossRefundTotals_for_RefundBasketPositions(): void
     {
         $actual = $this->sut->create($this->orderLineItems);
 
@@ -220,7 +222,7 @@ class RefundBasketPositionDtoCollectionFactoryTest extends TestCase
         $this->assertEquals(50, $actual->getElements()[1]->grossRefundTotal);
     }
 
-    public function test_creates_maps_netRefundTotals_for_RefundBasketPositions() : void
+    public function test_creates_maps_netRefundTotals_for_RefundBasketPositions(): void
     {
         $actual = $this->sut->create($this->orderLineItems);
 

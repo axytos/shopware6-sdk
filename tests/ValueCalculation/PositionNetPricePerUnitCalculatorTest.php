@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\ValueCalculation;
 
@@ -49,12 +51,12 @@ class PositionNetPricePerUnitCalculatorTest extends TestCase
             [1, 0, 0, 1],
             [0, 1, 0, 0],
             [0, 0, 1, 0],
-            
+
             [1, 1, 1, 0],
             [1, 2, 1, 0.5],
             [1, 2, 2, 0],
             [1, 3, 2, 0.33],
-            
+
             [2, 1, 1, 1],
             [2, 2, 1, 1.5],
             [2, 3, 1, 1.67],

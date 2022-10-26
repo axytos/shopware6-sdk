@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -122,7 +124,7 @@ class PaymentControlBasketPositionDtoFactoryTest extends TestCase
     }
 
     //============================================================================================================
-    
+
     public function test_createShippingPosition_sets_productId_to_zero(): void
     {
         $orderEntity = $this->createOrderEntity();
@@ -158,7 +160,7 @@ class PaymentControlBasketPositionDtoFactoryTest extends TestCase
 
         $this->assertEquals($orderEntity->getShippingTotal(), $actual->grossPositionTotal);
     }
-    
+
     public function test_createShippingPosition_calculates_net_position_total(): void
     {
         $orderEntity = $this->createOrderEntity();

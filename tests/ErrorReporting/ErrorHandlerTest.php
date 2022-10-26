@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\ErrorReporting;
 
@@ -47,9 +49,9 @@ class ErrorHandlerTest extends TestCase
         $this->expectNotToPerformAssertions();
 
         $error = new Exception();
-        
+
         $this->kernel->method('isDebug')->willReturn(false);
-        
+
         $this->sut->handle($error);
     }
 
@@ -58,7 +60,7 @@ class ErrorHandlerTest extends TestCase
         $error = new Exception();
 
         $this->expectExceptionObject($error);
-        
+
         $this->kernel->method('isDebug')->willReturn(true);
 
         $this->sut->handle($error);

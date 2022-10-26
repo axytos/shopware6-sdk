@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -22,7 +24,7 @@ class DeliveryAddressDtoFactoryTest extends TestCase
         $this->sut = new DeliveryAddressDtoFactory();
     }
 
-    public function test_create_maps_deliveryAddress_correctly() : void
+    public function test_create_maps_deliveryAddress_correctly(): void
     {
         /** @var OrderEntity&MockObject $order */
         $order = $this->createMock(OrderEntity::class);
@@ -54,7 +56,7 @@ class DeliveryAddressDtoFactoryTest extends TestCase
         $order
             ->method('getDeliveries')
             ->willReturn($deliveries);
-        
+
         $deliveries
             ->method('getElements')
             ->willReturn($deliveryElements);
@@ -66,15 +68,15 @@ class DeliveryAddressDtoFactoryTest extends TestCase
         $shippingOrderAddress
             ->method('getStreet')
             ->willReturn($street);
-        
+
         $shippingOrderAddress
             ->method('getCity')
             ->willReturn($city);
-        
+
         $shippingOrderAddress
             ->method('getCompany')
             ->willReturn($company);
-    
+
         $shippingOrderAddress
             ->method('getFirstName')
             ->willReturn($firstname);
@@ -102,7 +104,7 @@ class DeliveryAddressDtoFactoryTest extends TestCase
         $shippingOrderAddress
             ->method('getCountryState')
             ->willReturn($countryState);
-        
+
         $countryState
             ->method('getName')
             ->willReturn($stateName);
@@ -110,7 +112,7 @@ class DeliveryAddressDtoFactoryTest extends TestCase
         $shippingOrderAddress
             ->method('getSalutation')
             ->willReturn($salutation);
-        
+
         $salutation
             ->method('getDisplayName')
             ->willReturn($salutationDisplayName);

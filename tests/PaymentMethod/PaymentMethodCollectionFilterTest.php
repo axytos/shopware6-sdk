@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\PaymentMethod;
 
@@ -63,7 +65,7 @@ class PaymentMethodCollectionFilterTest extends TestCase
         $this->paymentMethodPredicates
             ->method('isNotUnsafe')
             ->willReturnMap($config);
-        
+
         $actual = $this->sut->filterNotUnsafePaymentMethods($paymentMethodCollection);
 
         $this->assertEquals(2, $actual->count());
@@ -102,8 +104,7 @@ class PaymentMethodCollectionFilterTest extends TestCase
     {
         $paymentMethods = [];
 
-        for ($i=0; $i < $count; $i++) 
-        { 
+        for ($i = 0; $i < $count; $i++) {
             $paymentMethods[$i] = new PaymentMethodEntity();
             $paymentMethods[$i]->setId("paymentMethod$i");
             $paymentMethods[$i]->setUniqueIdentifier("paymentMethod$i");

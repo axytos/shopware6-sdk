@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\PaymentMethod;
 
@@ -18,7 +20,7 @@ class PaymentMethodPredicatesTest extends TestCase
 {
     /** @var PaymentMethodConfigurationInterface&MockObject */
     private PaymentMethodConfigurationInterface $paymentMethodConfiguration;
-    
+
     /** @var FallbackModeConfigurationInterface&MockObject */
     private FallbackModeConfigurationInterface $fallbackModeConfiguration;
 
@@ -39,10 +41,10 @@ class PaymentMethodPredicatesTest extends TestCase
      * @dataProvider isAllowedFallbackTestDataProvider
      */
     public function test_isAllowedFallback(
-        string $fallbackMode, 
-        string $paymentMethodConfig, 
-        bool $expectedOutcome): void
-    {
+        string $fallbackMode,
+        string $paymentMethodConfig,
+        bool $expectedOutcome
+    ): void {
         $paymentMethodId = 'paymentMethodId';
         $paymentMethodEntity = $this->createPaymentMethodEntity($paymentMethodId);
 
@@ -88,7 +90,7 @@ class PaymentMethodPredicatesTest extends TestCase
      */
     public function test_usesHandler(string $handlerIdentifier, string $handlerClass, bool $expectedOutcome): void
     {
-        /** @var PaymentMethodEntity&MockObject */    
+        /** @var PaymentMethodEntity&MockObject */
         $paymentMethodEntity = $this->createMock(PaymentMethodEntity::class);
         $paymentMethodEntity
             ->method('getHandlerIdentifier')

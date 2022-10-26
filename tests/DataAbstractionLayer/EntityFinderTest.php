@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataAbstractionLayer;
 
@@ -38,7 +40,7 @@ class EntityFinderTest extends TestCase
         $searchResult->method('count')->willReturn(1);
         $searchResult->method('first')->willReturn($entity);
         $this->entityRepository->method('search')->with($criteria, $context)->willReturn($searchResult);
-        
+
         $actual = $this->sut->findFirst($criteria, $context);
 
         $this->assertSame($entity, $actual);
@@ -73,7 +75,7 @@ class EntityFinderTest extends TestCase
         $searchResult->method('count')->willReturn(0);
         $searchResult->method('first')->willReturn($entity);
         $this->entityRepository->method('search')->with($criteria, $context)->willReturn($searchResult);
-        
+
         $this->expectException(LogicException::class);
 
         $this->sut->findFirst($criteria, $context);

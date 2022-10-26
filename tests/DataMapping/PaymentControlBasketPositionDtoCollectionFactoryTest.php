@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -70,8 +72,7 @@ class PaymentControlBasketPositionDtoCollectionFactoryTest extends TestCase
         $shippingPositionDto = $this->createPaymentControlBasketPositionDto();
 
         $mapping = [];
-        for ($i=0; $i < $count; $i++) 
-        { 
+        for ($i = 0; $i < $count; $i++) {
             array_push($mapping, [$orderLineItems->getAt($i), $basketPositionDtos[$i]]);
         }
 
@@ -93,9 +94,8 @@ class PaymentControlBasketPositionDtoCollectionFactoryTest extends TestCase
 
         $this->assertCount(4, $actual);
         $this->assertContains($shippingPositionDto, $actual);
-        
-        foreach ($basketPositionDtos as $dto) 
-        {
+
+        foreach ($basketPositionDtos as $dto) {
             $this->assertContains($dto, $actual);
         }
     }
@@ -123,10 +123,10 @@ class PaymentControlBasketPositionDtoCollectionFactoryTest extends TestCase
     private function createOrderLineItem(): OrderLineItemEntity
     {
         $id = bin2hex(random_bytes(64));
-        
+
         /** @var OrderLineItemEntity&MockObject */
         $entity = $this->createMock(OrderLineItemEntity::class);
-        $entity->method('getUniqueIdentifier')->willReturn($id );
+        $entity->method('getUniqueIdentifier')->willReturn($id);
 
         return $entity;
     }
@@ -142,7 +142,7 @@ class PaymentControlBasketPositionDtoCollectionFactoryTest extends TestCase
         $shippingCosts->method("getTotalPrice")->willReturn(100.0);
         $shippingCosts->method("getCalculatedTaxes")->willReturn(new CalculatedTaxCollection([$calculatedTax]));
         $calculatedTax->method("getTaxRate")->willReturn(19.0);
-        
+
         return $shippingCosts;
     }
 }

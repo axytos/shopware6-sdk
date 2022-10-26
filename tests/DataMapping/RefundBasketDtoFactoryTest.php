@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -31,7 +33,7 @@ class RefundBasketDtoFactoryTest extends TestCase
         $this->sut = new RefundBasketDtoFactory($this->refundBasketPositionDtoCollectionFactory, $this->refundBasketTaxGroupDtoCollectionFactory);
     }
 
-    public function test_maps_netTotal() : void
+    public function test_maps_netTotal(): void
     {
         $amountNet = 10.1;
 
@@ -47,7 +49,7 @@ class RefundBasketDtoFactoryTest extends TestCase
         $this->assertSame($amountNet, $actual);
     }
 
-    public function test_maps_grossTotal() : void
+    public function test_maps_grossTotal(): void
     {
         $grossTotal = 11.1;
 
@@ -63,7 +65,7 @@ class RefundBasketDtoFactoryTest extends TestCase
         $this->assertSame($grossTotal, $actual);
     }
 
-    public function test_maps_positions() : void
+    public function test_maps_positions(): void
     {
         $positions = new RefundBasketPositionDtoCollection();
         $lineItems = new OrderLineItemCollection();
@@ -86,7 +88,7 @@ class RefundBasketDtoFactoryTest extends TestCase
         $this->assertSame($positions, $actual);
     }
 
-    public function test_maps_taxGroups() : void
+    public function test_maps_taxGroups(): void
     {
         $taxGroups = new RefundBasketTaxGroupDtoCollection();
         $calculatedTaxtes = new CalculatedTaxCollection();

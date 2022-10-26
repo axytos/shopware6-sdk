@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -70,7 +72,7 @@ class CreateInvoiceBasketDtoFactoryTest extends TestCase
         $this->assertSame($basketPositions, $actual->positions);
     }
 
-    public function test_maps_taxGroups() : void
+    public function test_maps_taxGroups(): void
     {
         $taxGroups = new CreateInvoiceTaxGroupDtoCollection();
         $calculatedTaxtes = new CalculatedTaxCollection();

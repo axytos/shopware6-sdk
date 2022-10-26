@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -51,7 +53,7 @@ class BasketPositionDtoFactoryTest extends TestCase
             $this->positionProductNameCalculator
         );
     }
-    
+
     public function test_create_maps_total_price_as_gross_position_total(): void
     {
         $orderLineItem = $this->createOrderLineItemEntity();
@@ -90,7 +92,7 @@ class BasketPositionDtoFactoryTest extends TestCase
 
         $this->assertEquals($productName, $actual->productName);
     }
-    
+
     public function test_create_maps_quantity_as_quantity(): void
     {
         $orderLineItem = $this->createOrderLineItemEntity();
@@ -99,7 +101,7 @@ class BasketPositionDtoFactoryTest extends TestCase
 
         $this->assertEquals($orderLineItem->getQuantity(), $actual->quantity);
     }
-    
+
     public function test_create_calculates_net_position_total(): void
     {
         $netPositionTotal = 50.78;
@@ -114,7 +116,7 @@ class BasketPositionDtoFactoryTest extends TestCase
 
         $this->assertEquals($netPositionTotal, $actual->netPositionTotal);
     }
-    
+
     public function test_create_calculates_tax_percent(): void
     {
         $taxPercent = 51.78;
@@ -129,7 +131,7 @@ class BasketPositionDtoFactoryTest extends TestCase
 
         $this->assertEquals($taxPercent, $actual->taxPercent);
     }
-    
+
     public function test_create_calculates_net_price_per_unit(): void
     {
         $netPricePerUnit = 52.78;
@@ -161,7 +163,7 @@ class BasketPositionDtoFactoryTest extends TestCase
     }
 
     //============================================================================================================
-    
+
     public function test_createShippingPosition_sets_productId_to_zero(): void
     {
         $orderEntity = $this->createOrderEntity();
@@ -197,7 +199,7 @@ class BasketPositionDtoFactoryTest extends TestCase
 
         $this->assertEquals($orderEntity->getShippingTotal(), $actual->grossPositionTotal);
     }
-    
+
     public function test_createShippingPosition_calculates_net_position_total(): void
     {
         $orderEntity = $this->createOrderEntity();

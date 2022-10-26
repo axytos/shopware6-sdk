@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\ValueCalculation;
 
@@ -24,7 +26,7 @@ class PromotionIdentifierCalculatorTest extends TestCase
     {
         /** @var PromotionEntity&MockObject */
         $promotionEntity = $this->createMock(PromotionEntity::class);
-        $promotionEntity->method('getName')->willReturn($promotionName); 
+        $promotionEntity->method('getName')->willReturn($promotionName);
 
         /** @var OrderLineItemEntity&MockObject */
         $orderLineItemEntity = $this->createMock(OrderLineItemEntity::class);

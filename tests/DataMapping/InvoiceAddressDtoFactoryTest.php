@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -20,8 +22,8 @@ class InvoiceAddressDtoFactoryTest extends TestCase
         $this->sut = new InvoiceAddressDtoFactory();
     }
 
-    public function test_create_maps_invoice_correctly() : void
-    {   
+    public function test_create_maps_invoice_correctly(): void
+    {
         /** @var OrderEntity&MockObject $order */
         $order = $this->createMock(OrderEntity::class);
         /** @var OrderAddressEntity&MockObject $billingAddress */
@@ -51,15 +53,15 @@ class InvoiceAddressDtoFactoryTest extends TestCase
         $billingAddress
             ->method('getStreet')
             ->willReturn($street);
-        
+
         $billingAddress
             ->method('getCity')
             ->willReturn($city);
-        
+
         $billingAddress
             ->method('getCompany')
             ->willReturn($company);
-    
+
         $billingAddress
             ->method('getFirstName')
             ->willReturn($firstname);
@@ -87,7 +89,7 @@ class InvoiceAddressDtoFactoryTest extends TestCase
         $billingAddress
             ->method('getCountryState')
             ->willReturn($countryState);
-        
+
         $countryState
             ->method('getName')
             ->willReturn($stateName);
@@ -95,7 +97,7 @@ class InvoiceAddressDtoFactoryTest extends TestCase
         $billingAddress
             ->method('getSalutation')
             ->willReturn($salutation);
-        
+
         $salutation
             ->method('getDisplayName')
             ->willReturn($salutationDisplayName);

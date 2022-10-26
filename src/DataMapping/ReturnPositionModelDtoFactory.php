@@ -24,4 +24,13 @@ class ReturnPositionModelDtoFactory
         $position->productId = $this->positionProductIdCalcualtor->calculate($orderLineItemEntity);
         return $position;
     }
+
+    public function createShippingPosition(): ReturnPositionModelDto
+    {
+        $shippingPosition = new ReturnPositionModelDto();
+        $shippingPosition->productId = '0';
+        $shippingPosition->quantityToReturn = 1;
+
+        return $shippingPosition;
+    }
 }

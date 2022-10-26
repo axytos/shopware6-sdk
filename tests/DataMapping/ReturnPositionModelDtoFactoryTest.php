@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Axytos\Shopware\Tests\DataMapping;
 
@@ -39,7 +41,7 @@ class ReturnPositionModelDtoFactoryTest extends TestCase
     {
         /** @var OrderLineItemEntity&MockObject */
         $orderLineItem = $this->createMock(OrderLineItemEntity::class);
-        
+
         $productId = 'productId';
         $this->positionProductIdCalculator
             ->method('calculate')
