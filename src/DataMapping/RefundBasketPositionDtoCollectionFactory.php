@@ -39,6 +39,7 @@ class RefundBasketPositionDtoCollectionFactory
 
         $groupedCredits = $this->groupLineItemsByTaxRate($credits);
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\RefundBasketPositionDto[] */
         $positions = [];
 
         foreach ($groupedCredits as $taxRate => $credits) {
@@ -91,6 +92,7 @@ class RefundBasketPositionDtoCollectionFactory
      */
     private function groupLineItemsByTaxRate(OrderLineItemCollection $orderLineItems): array
     {
+        /** @var array<string,array<OrderLineItemEntity>> */
         return $orderLineItems->reduce(function (array $carry, OrderLineItemEntity $orderLineItemEntity) {
             $price = $orderLineItemEntity->getPrice();
             if (!is_null($price)) {

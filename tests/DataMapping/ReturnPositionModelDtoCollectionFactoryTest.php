@@ -31,6 +31,7 @@ class ReturnPositionModelDtoCollectionFactoryTest extends TestCase
      */
     public function test_create(OrderLineItemCollection $orderLineItemCollection): void
     {
+        /** @var array<int, array<int, mixed>> */
         $mappings = $orderLineItemCollection->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return [$orderLineItemEntity, $this->createMock(ReturnPositionModelDto::class)];
         });
@@ -71,6 +72,7 @@ class ReturnPositionModelDtoCollectionFactoryTest extends TestCase
 
     private function createOrderLineItemCollection(int $count): OrderLineItemCollection
     {
+        /** @var array */
         $elements = array_fill(0, $count, null);
         $elements = array_map([$this,'createOrderLineItem'], $elements);
         return new OrderLineItemCollection($elements);

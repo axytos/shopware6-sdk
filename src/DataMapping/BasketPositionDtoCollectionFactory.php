@@ -23,10 +23,12 @@ class BasketPositionDtoCollectionFactory
             return new BasketPositionDtoCollection();
         }
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\BasketPositionDto[] */
         $positions = $orderEntity->getLineItems()->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return $this->basketPositionFactory->create($orderLineItemEntity);
         });
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\BasketPositionDto[] */
         $positions = array_values($positions);
         array_push($positions, $this->basketPositionFactory->createShippingPosition($orderEntity));
 

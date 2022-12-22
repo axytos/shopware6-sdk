@@ -23,10 +23,12 @@ class CreateInvoiceBasketPositionDtoCollectionFactory
             return new CreateInvoiceBasketPositionDtoCollection();
         }
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\CreateInvoiceBasketPositionDto[] */
         $positions = $orderEntity->getLineItems()->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return $this->createInvoiceBasketPositionDtoFactory->create($orderLineItemEntity);
         });
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\CreateInvoiceBasketPositionDto[] */
         $positions = array_values($positions);
         array_push($positions, $this->createInvoiceBasketPositionDtoFactory->createShippingPosition($orderEntity));
 

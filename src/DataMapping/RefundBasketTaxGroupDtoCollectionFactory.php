@@ -23,6 +23,7 @@ class RefundBasketTaxGroupDtoCollectionFactory
             return new RefundBasketTaxGroupDtoCollection();
         }
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\RefundBasketTaxGroupDto[] */
         $positions = array_values($calculatedTaxCollection->map(function (CalculatedTax $calculatedTax) {
             return $this->refundBasketTaxGroupDtoFactory->create($calculatedTax);
         }));

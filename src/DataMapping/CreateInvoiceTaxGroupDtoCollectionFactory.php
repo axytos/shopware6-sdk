@@ -23,6 +23,7 @@ class CreateInvoiceTaxGroupDtoCollectionFactory
             return new CreateInvoiceTaxGroupDtoCollection();
         }
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\CreateInvoiceTaxGroupDto[] */
         $positions = array_values($calculatedTaxCollection->map(function (CalculatedTax $calculatedTax) {
             return $this->createInvoiceTaxGroupDtoFactory->create($calculatedTax);
         }));

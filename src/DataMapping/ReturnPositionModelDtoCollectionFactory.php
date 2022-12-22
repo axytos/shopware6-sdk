@@ -23,6 +23,7 @@ class ReturnPositionModelDtoCollectionFactory
             return new ReturnPositionModelDtoCollection();
         }
 
+        /** @var \Axytos\ECommerce\DataTransferObjects\ReturnPositionModelDto[] */
         $positions = array_values($orderLineItemCollection->map(function (OrderLineItemEntity $orderLineItemEntity) {
             return $this->returnPositionModelDtoFactory->create($orderLineItemEntity);
         }));
