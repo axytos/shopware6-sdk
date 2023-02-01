@@ -19,7 +19,9 @@ class DeliveryAddressDtoFactory
             $deliveryElements = $deliveries->getElements();
 
             if (is_array($deliveryElements) && !empty($deliveryElements)) {
-                $deliveryElement = $deliveryElements[array_key_first($deliveryElements)];
+                $keys = array_keys($deliveryElements);
+                $firstKey = current($keys);
+                $deliveryElement = $deliveryElements[$firstKey];
 
                 $shippingOrderAddress = $deliveryElement->getShippingOrderAddress();
 
